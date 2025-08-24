@@ -1,12 +1,17 @@
 let friendsList = [];
+const savedList = localStorage.getItem("friendsList");
+if (savedList) {
+    friendsList = JSON.parse(savedList);
+    updateFriendsList();
+}
 
-function addFriends(friend) {
+function addFriends() {
     const input =  document.getElementById("inputAddFriend");
 
     if (input.value == "") {
         alert("Preencha o campo com o nome de um amigo!")
     } else {
-        friend = input.value;
+        let friend = input.value;
         friendsList.push(friend);
 
         console.log(friendsList);
@@ -28,6 +33,8 @@ function updateFriendsList() {
             </button>
         `;
     }
+
+    localStorage.setItem("friendsList", JSON.stringify(friendsList));
 }
 
 function removeFriend(index) {
